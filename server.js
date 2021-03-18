@@ -4,23 +4,7 @@ require("dotenv").config();
 
 const PORT = process.env.PORT || 3000;
 
-const fruits = [
-  {
-    name: "apple",
-    color: "red",
-    readyToEat: true,
-  },
-  {
-    name: "pear",
-    color: "green",
-    readyToEat: false,
-  },
-  {
-    name: "banana",
-    color: "yellow",
-    readyToEat: true,
-  },
-];
+const fruits = require("./models/fruits.js");
 
 /////////////
 // ROUTES
@@ -33,7 +17,9 @@ app.get("/fruits/", (req, res) => {
 
 // Show
 app.get("/fruits/:indexOfFruitsArray", (req, res) => {
-  res.send(fruits[req.params.indexOfFruitsArray]);
+  res.render("show.ejs", {
+    fruit: fruits[req.params.indexOfFruitsArray],
+  });
 });
 
 app.listen(PORT, () => {
